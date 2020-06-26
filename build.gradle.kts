@@ -1,4 +1,7 @@
+@file:Suppress("PropertyName")
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.dokka.gradle.DokkaTask
 
 val kolor_version: String by project
 val result_version: String by project
@@ -7,6 +10,7 @@ plugins {
     maven
     `java-library`
     kotlin("jvm") version "1.3.72"
+    id("org.jetbrains.dokka") version "0.10.1"
 }
 
 group = "dev.31416"
@@ -70,6 +74,30 @@ tasks {
 
         testLogging {
             events("passed", "skipped", "failed")
+        }
+    }
+
+    @Suppress("UNUSED_VARIABLE")
+    val dokka by getting(DokkaTask::class) {
+        outputFormat = "html"
+        outputDirectory = "docs/dokka"
+
+        configuration {
+            skipDeprecated = true
+
+            reportUndocumented = true
+
+            skipEmptyPackages = true
+
+            includes = listOf("docs/reflectr.md")
+
+            sourceLink {
+                path = "./"
+
+                url = "https://github.com/blogify-dev/reflectr/blob/master/"
+
+                lineSuffix = "#L"
+            }
         }
     }
 }

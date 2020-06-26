@@ -42,18 +42,6 @@ fun <V : Any, E : Exception> SuspendableResult<V, E>.asBoolean(): Boolean {
 }
 
 /**
- * Converts a boolean value into a [SuspendableResult], using the obvious mapping between the two
- *
- * @author Benjozork
- */
-fun Boolean.asResult(): Sr<Unit> {
-    return if (this)
-        SuspendableResult.Success(Unit)
-    else
-        SuspendableResult.Failure(IllegalStateException())
-}
-
-/**
  * Fetches the value of a [Result] or returns the result of [block] with the error if the result is a [Result.Failure]
  *
  * @author Benjozork
