@@ -1,0 +1,34 @@
+theme: "just-the-docs"
+color_scheme: dark
+heading_anchors: true
+
+# Config for another theme, minima. It can be used instead of just-the-docs
+# I'm leaving the config here because I'm not sure which one is better
+#theme: "minima"
+#
+#title: reflectr
+#description: >- # this means to ignore newlines until "baseurl:"
+#  Kotlin library for adding support for computed properties,
+#  mapping of objects and generation of DTOs and metadata
+#  and helpers for dealing with entities
+#baseurl: "" # the subpath of your site, e.g. /blog
+#url: "" # the base hostname & protocol for your site, e.g. http://example.com
+#github_username:  blogify-dev
+#
+
+#header_pages:
+#  - about.md
+
+defaults:
+  -
+    scope:
+      path: "index.md"
+    values:
+      layout: "home"
+  -
+    scope:
+      path: "**/*.md"
+    values:
+      layout: "page"
+
+source: "reflectr"

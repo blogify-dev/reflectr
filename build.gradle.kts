@@ -79,13 +79,13 @@ tasks {
 
     @Suppress("UNUSED_VARIABLE")
     val dokka by getting(DokkaTask::class) {
-        outputFormat = "html"
-        outputDirectory = "docs/dokka"
+        outputFormat = "jekyll"
+        outputDirectory = "docs/"
 
         configuration {
             skipDeprecated = true
 
-            reportUndocumented = true
+            reportUndocumented = false
 
             skipEmptyPackages = true
 
