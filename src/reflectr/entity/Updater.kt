@@ -27,7 +27,6 @@ import kotlin.reflect.KClass
  *
  * @author Benjozork
  */
-@ExperimentalStdlibApi
 suspend fun <R : Mapped> R.update (
     rawData: MappedData,
     objectMapper: ObjectMapper,

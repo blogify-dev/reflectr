@@ -41,7 +41,7 @@ private val noExternalFetcherMessage =
  *
  * @author Benjozork
  */
-@ExperimentalStdlibApi
+@OptIn(ExperimentalStdlibApi::class)
 @Suppress("UNCHECKED_CAST")
 suspend fun <TMapped : Mapped> KClass<out TMapped>.construct (
     data:               MappedData,

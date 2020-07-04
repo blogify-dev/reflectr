@@ -67,6 +67,7 @@ kotlin.sourceSets["test"].kotlin.srcDirs("test")
 tasks {
     withType<KotlinCompile>().configureEach {
         kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
     }
 
     withType<Test>().configureEach {
