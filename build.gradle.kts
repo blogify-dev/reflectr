@@ -1,7 +1,8 @@
 @file:Suppress("PropertyName")
 
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.dokka.gradle.DokkaTask
+import java.net.URL
+import java.io.File
 
 val kolor_version: String by project
 val result_version: String by project
@@ -9,12 +10,12 @@ val result_version: String by project
 plugins {
     maven
     `java-library`
-    kotlin("jvm") version "1.3.72"
-    id("org.jetbrains.dokka") version "0.10.1"
+    kotlin("jvm") version "1.4.0"
+    id("org.jetbrains.dokka") version "1.4.0-dev-49"
 }
 
 group = "dev.31416"
-version = "0.1.0"
+version = "0.2.0"
 
 repositories {
     mavenCentral()
@@ -22,7 +23,7 @@ repositories {
     jcenter()
     maven("https://jitpack.io")
     maven { url = uri("https://dl.bintray.com/kittinunf/maven") }
-    maven { url = uri("https://kotlin.bintray.com/ktor") }
+    maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/dokka/dev") }
 }
 
 dependencies {
@@ -78,26 +79,31 @@ tasks {
         }
     }
 
-    @Suppress("UNUSED_VARIABLE")
-    val dokka by getting(DokkaTask::class) {
-        outputFormat = "jekyll"
-        outputDirectory = "docs/"
+    dokkaHtml {
+        outputDirectory.set(File("docs/dokka"))
 
-        configuration {
-            skipDeprecated = true
+        dokkaSourceSets {
+            configureEach {
+                skipDeprecated.set(true)
 
-            reportUndocumented = false
+                reportUndocumented.set(false)
 
-            skipEmptyPackages = true
+                skipEmptyPackages.set(true)
 
-            includes = listOf("docs/reflectr.md")
+                includes.from("docs/reflectr.md")
 
-            sourceLink {
-                path = "./"
+                jdkVersion.set(8)
 
-                url = "https://github.com/blogify-dev/reflectr/blob/master/"
+                perPackageOption {
+                    prefix.set("reflectr.util")
+                    suppress.set(true)
+                }
 
-                lineSuffix = "#L"
+                sourceLink {
+                    localDirectory.set(projectDir)
+                    remoteUrl.set(URL("https://github.com/blogify-dev/reflectr/blob/master/"))
+                    remoteLineSuffix.set("#L")
+                }
             }
         }
     }
